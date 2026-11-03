@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Peddlers 30A — Spoke wheel hero</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;800&amp;family=Yellowtail&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#3959BA}a:hover{color:#01009A}
+@keyframes pd-spin{to{transform:rotate(360deg)}}
+@keyframes pd-unspin{to{transform:rotate(-360deg)}}
+@media (prefers-reduced-motion: reduce){.pd-wheel,.pd-tile{animation:none !important}}
+</style>
+</helmet>
+<div style="font-family: 'GT Walsheim Trial', 'Hanken Grotesk', 'DM Sans', system-ui, sans-serif; color: #1A1A1A; background: #F7F4F0; min-height: 900px; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden">
+
+<header style="width: 100%; box-sizing: border-box; padding: 18px 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; background: #FFFFFF; border-bottom: 1px solid rgba(0,0,0,0.08)">
+<a href="#" aria-label="Peddlers 30A home" style="display: inline-flex"><img src="./assets/9c6fee9d1ff5aeade3753383ba03da0f.png" alt="Peddlers 30A" style="height: 38px; width: auto; display: block"></a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 30px; font-size: 15px; letter-spacing: 1.2px; text-transform: uppercase">
+<a href="#" style="text-decoration: none">Rentals</a>
+<a href="#" style="text-decoration: none">About</a>
+<a href="#" style="text-decoration: none">FAQ</a>
+<a href="#" style="text-decoration: none">Contact</a>
+<a href="#" style="text-decoration: none">Blog</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 12px">
+<a href="tel:8502130040" style="background: #3959BA; color: #FFFFFF; text-decoration: none; font-size: 15px; padding: 14px 20px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">(850) 213-0040</a>
+<a href="#" style="background: #D6C6B2; color: #3959BA; text-decoration: none; font-size: 15px; letter-spacing: 1.2px; text-transform: uppercase; padding: 14px 22px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Reserve Now</a>
+</div>
+</header>
+
+<section style="width: 100%; max-width: 1360px; margin: 0 auto; box-sizing: border-box; padding: 40px 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 40px; flex-grow: 1">
+
+<div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-family: 'Pitch Sans', 'Space Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #01009A">Renting bikes on 30A since 2011</p>
+<h1 style="margin: 0; display: flex; flex-direction: column; font-weight: 500; font-size: 70px; line-height: 1.02; letter-spacing: -0.02em">
+<span style="font-family: 'Palm Canyon Drive', 'Yellowtail', cursive; font-weight: 400; font-size: 96px; color: #3959BA; letter-spacing: 0; line-height: 1">Ride More.</span>
+<span>Explore 30A.</span>
+</h1>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #666666; max-width: 500px">Every spin of the wheel lands somewhere good — the coastal bike path, Rosemary Beach, a scoop at Sweet Peddler, live music at the Pavilion. It all starts at our door.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#" style="background: #3959BA; color: #FFFFFF; text-decoration: none; font-size: 15px; letter-spacing: 1.2px; text-transform: uppercase; padding: 17px 28px">Reserve Now</a>
+<a href="#" style="color: #3959BA; text-decoration: none; font-size: 15px; letter-spacing: 1.2px; text-transform: uppercase; padding: 16px 26px; border: 1px solid #3959BA">Explore Pavilion</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 28px; margin-top: 8px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.12)">
+<div style="display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 30px; font-weight: 500; color: #01009A">4.3★</strong><span style="font-family: 'Pitch Sans', 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #666666">Google rating</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 30px; font-weight: 500; color: #01009A">15+</strong><span style="font-family: 'Pitch Sans', 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #666666">Years on 30A</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 30px; font-weight: 500; color: #01009A">Free</strong><span style="font-family: 'Pitch Sans', 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #666666">Helmet + lock</span></div>
+</div>
+</div>
+
+<div style="flex: 0 0 auto; width: 640px; height: 640px; position: relative; margin: 0 auto">
+<div aria-hidden="true" style="position: absolute; inset: 0; border-radius: 50%; border: 14px solid #1A1A1A; box-sizing: border-box"></div>
+<div aria-hidden="true" style="position: absolute; inset: 14px; border-radius: 50%; border: 3px solid #D6C6B2; box-sizing: border-box"></div>
+<div class="pd-wheel" style="position: absolute; inset: 0; animation: pd-spin 70s linear infinite">
+<svg aria-hidden="true" width="640" height="640" viewBox="0 0 640 640" style="position: absolute; inset: 0"><g stroke="#B9AB98" stroke-width="1.5"><line x1="320" y1="40" x2="320" y2="600"></line><line x1="40" y1="320" x2="600" y2="320"></line><line x1="122" y1="122" x2="518" y2="518"></line><line x1="518" y1="122" x2="122" y2="518"></line><line x1="213" y1="61" x2="427" y2="579"></line><line x1="427" y1="61" x2="213" y2="579"></line><line x1="61" y1="213" x2="579" y2="427"></line><line x1="61" y1="427" x2="579" y2="213"></line></g></svg>
+<div style="position: absolute; left: 475px; top: 245px; width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 5px solid #FFFFFF; box-sizing: border-box; box-shadow: 0 10px 24px rgba(1,0,154,0.18)"><img class="pd-tile" src="./assets/5b38dc9193525dfd1803d410f482d928.jpg" alt="Three riders cycling past palm trees" style="width: 100%; height: 100%; object-fit: cover; display: block; animation: pd-unspin 70s linear infinite"></div>
+<div style="position: absolute; left: 404px; top: 404px; width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 5px solid #FFFFFF; box-sizing: border-box; box-shadow: 0 10px 24px rgba(1,0,154,0.18)"><img class="pd-tile" src="./assets/30fe7fa07fa29b8f4f45c13392f74c48.jpg" alt="Cups of ice cream from Sweet Peddler" style="width: 100%; height: 100%; object-fit: cover; display: block; animation: pd-unspin 70s linear infinite"></div>
+<div style="position: absolute; left: 245px; top: 475px; width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 5px solid #FFFFFF; box-sizing: border-box; box-shadow: 0 10px 24px rgba(1,0,154,0.18)"><img class="pd-tile" src="./assets/57b15a37c362c55ee55fb387d855255e.jpg" alt="Mom on a cruiser towing two kids in a trailer" style="width: 100%; height: 100%; object-fit: cover; display: block; animation: pd-unspin 70s linear infinite"></div>
+<div style="position: absolute; left: 86px; top: 404px; width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 5px solid #FFFFFF; box-sizing: border-box; box-shadow: 0 10px 24px rgba(1,0,154,0.18)"><img class="pd-tile" src="./assets/533bdd666fd65c636966558c405d5d57.jpg" alt="Drafts and cocktails in the sun" style="width: 100%; height: 100%; object-fit: cover; display: block; animation: pd-unspin 70s linear infinite"></div>
+<div style="position: absolute; left: 15px; top: 245px; width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 5px solid #FFFFFF; box-sizing: border-box; box-shadow: 0 10px 24px rgba(1,0,154,0.18)"><img class="pd-tile" src="./assets/b6848e5e9c38c2796e72bdc307c9e099.jpg" alt="A cyclist rides past a white coastal building framed by palms" style="width: 100%; height: 100%; object-fit: cover; display: block; animation: pd-unspin 70s linear infinite"></div>
+<div style="position: absolute; left: 86px; top: 86px; width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 5px solid #FFFFFF; box-sizing: border-box; box-shadow: 0 10px 24px rgba(1,0,154,0.18)"><img class="pd-tile" src="./assets/90873560580ca01fa4abce4fa4ad5cd6.jpg" alt="Latte and croissant from Kickstand" style="width: 100%; height: 100%; object-fit: cover; display: block; animation: pd-unspin 70s linear infinite"></div>
+<div style="position: absolute; left: 245px; top: 15px; width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 5px solid #FFFFFF; box-sizing: border-box; box-shadow: 0 10px 24px rgba(1,0,154,0.18)"><img class="pd-tile" src="./assets/fbfa1827ee083b6b1830e74f201dba5b.jpg" alt="Live Music Tonight sign next to rental bikes" style="width: 100%; height: 100%; object-fit: cover; display: block; animation: pd-unspin 70s linear infinite"></div>
+<div style="position: absolute; left: 404px; top: 86px; width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 5px solid #FFFFFF; box-sizing: border-box; box-shadow: 0 10px 24px rgba(1,0,154,0.18)"><img class="pd-tile" src="./assets/551fd4bfc1b3524dd4cfff1ade77cd55.jpg" alt="Riders cruising a shaded 30A trail" style="width: 100%; height: 100%; object-fit: cover; display: block; animation: pd-unspin 70s linear infinite"></div>
+</div>
+<div style="position: absolute; left: 50%; top: 50%; width: 190px; height: 190px; margin: -95px 0 0 -95px; border-radius: 50%; background: #3959BA; color: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-align: center; box-shadow: 0 0 0 8px #F7F4F0, 0 0 0 10px #3959BA">
+<span style="font-size: 44px; font-weight: 500; line-height: 1">1K+</span>
+<span style="font-family: 'Pitch Sans', 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase">Bikes ready</span>
+<span style="font-family: 'Palm Canyon Drive', 'Yellowtail', cursive; font-size: 26px; color: #D6C6B2">to roll</span>
+</div>
+</div>
+
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

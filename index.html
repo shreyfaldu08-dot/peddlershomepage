@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peddlers 30A — Hero Sections</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-dark: #0a0d14;
+      --panel-bg: rgba(14, 18, 30, 0.88);
+      --panel-border: rgba(255, 255, 255, 0.14);
+      --accent-blue: #3959BA;
+      --accent-dark-blue: #01009A;
+      --accent-sand: #D6C6B2;
+      --accent-glow: rgba(57, 89, 186, 0.5);
+      --text-main: #FFFFFF;
+      --text-muted: #9BA3AF;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      user-select: none;
+    }
+
+    /* Full Viewport Container */
+    #viewer-container {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+      background: #FFFFFF;
+    }
+
+    /* Iframe Stack */
+    .hero-frame {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      transform: scale(0.997);
+      background: #FFFFFF;
+    }
+
+    .hero-frame.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+      z-index: 2;
+    }
+
+    /* Screen edge side navigation paddles */
+    .edge-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      width: 44px;
+      height: 68px;
+      background: rgba(14, 18, 30, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      opacity: 0.55;
+      outline: none;
+    }
+
+    .edge-arrow:hover {
+      opacity: 1;
+      width: 54px;
+      background: rgba(57, 89, 186, 0.95);
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .edge-arrow.prev {
+      left: 0;
+      border-radius: 0 14px 14px 0;
+      border-left: none;
+    }
+
+    .edge-arrow.next {
+      right: 0;
+      border-radius: 14px 0 0 14px;
+      border-right: none;
+    }
+
+    /* Bottom Navigation Dock: Compact, non-intrusive bar with small arrows */
+    #bottom-dock {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--panel-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--panel-border);
+      border-radius: 999px;
+      padding: 7px 14px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    /* Small Arrows Below */
+    .small-nav-arrow {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+      outline: none;
+    }
+
+    .small-nav-arrow:hover {
+      background: var(--accent-blue);
+      border-color: #6C8FFF;
+      transform: scale(1.1);
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+
+    .small-nav-arrow:active {
+      transform: scale(0.94);
+    }
+
+    .small-nav-arrow svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 2.5;
+    }
+
+    .dock-divider {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.16);
+      margin: 0 3px;
+    }
+
+    /* Numbered dots */
+    #dots-container {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dock-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: #CBD5E1;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .dock-dot:hover {
+      background: rgba(255, 255, 255, 0.22);
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    .dock-dot.active {
+      background: var(--accent-blue);
+      border-color: #6C8FFF;
+      color: #FFFFFF;
+      box-shadow: 0 0 12px var(--accent-glow);
+      transform: scale(1.1);
+    }
+
+    /* Quick Jump Dropdown */
+    .jump-btn-wrap {
+      position: relative;
+    }
+
+    .icon-pill-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #E2E8F0;
+      height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .icon-pill-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: #FFFFFF;
+    }
+
+    .icon-pill-btn.active {
+      background: var(--accent-blue);
+      border-color: #6C8FFF;
+      color: #FFFFFF;
+    }
+
+    #jump-dropdown {
+      position: absolute;
+      bottom: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      width: 320px;
+      background: var(--panel-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 6px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    #jump-dropdown.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .jump-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      background: transparent;
+      border: none;
+      color: #E2E8F0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      width: 100%;
+    }
+
+    .jump-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+    }
+
+    .jump-item.active {
+      background: rgba(57, 89, 186, 0.25);
+      border: 1px solid rgba(121, 163, 255, 0.3);
+      color: #92B4FF;
+    }
+
+    .jump-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-sand);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 640px) {
+      .edge-arrow {
+        display: none;
+      }
+      .jump-btn-wrap {
+        display: none;
+      }
+      #bottom-dock {
+        bottom: 12px;
+        padding: 6px 10px;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Side Edge Arrows for front and back switching -->
+  <button class="edge-arrow prev" id="edge-prev" aria-label="Previous Hero Version (Left Arrow)">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+  </button>
+  <button class="edge-arrow next" id="edge-next" aria-label="Next Hero Version (Right Arrow)">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+  </button>
+
+  <!-- Fullscreen Hero Container & Iframe Stack -->
+  <main id="viewer-container">
+    <!-- 6 Hero Iframes are injected here -->
+  </main>
+
+  <!-- Compact Bottom Navigation Dock with small arrows below -->
+  <nav id="bottom-dock" aria-label="Hero version navigation">
+    <!-- Small Left Arrow -->
+    <button class="small-nav-arrow" id="btn-dock-prev" aria-label="Previous Hero Version" title="Previous (Left Arrow key)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+    </button>
+
+    <div class="dock-divider"></div>
+
+    <!-- Quick Jump Menu -->
+    <div class="jump-btn-wrap">
+      <button class="icon-pill-btn" id="btn-jump-menu">
+        <span id="label-active-num">1 / 6</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div id="jump-dropdown">
+        <!-- Populated by JavaScript -->
+      </div>
+    </div>
+
+    <!-- 6 Numbered Dots -->
+    <div id="dots-container">
+      <!-- Populated by JS -->
+    </div>
+
+    <div class="dock-divider"></div>
+
+    <!-- Autoplay toggle -->
+    <button class="icon-pill-btn" id="btn-autoplay" title="Auto-advance (Spacebar)">
+      <svg id="icon-play" width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      <svg id="icon-pause" width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+      <span id="text-play-status">Play</span>
+    </button>
+
+    <div class="dock-divider"></div>
+
+    <!-- Small Right Arrow -->
+    <button class="small-nav-arrow" id="btn-dock-next" aria-label="Next Hero Version" title="Next (Right Arrow key)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </button>
+  </nav>
+
+  <script>
+    // Hero Section Manifest
+    const HERO_SECTIONS = [
+      {
+        id: 1,
+        code: "04",
+        title: "04 · Ride. Bite. Stay",
+        folder: "04 · Ride. Bite. Stay-html",
+        file: "Bold.dc.html",
+        tag: "Editorial Bold"
+      },
+      {
+        id: 2,
+        code: "06",
+        title: "06 · Curved Reel",
+        folder: "06 · Curved Reel-html",
+        file: "ReelCurve.dc.html",
+        tag: "3D Perspective"
+      },
+      {
+        id: 3,
+        code: "10",
+        title: "10 · The Spoke Wheel",
+        folder: "10 · The Spoke Wheel-html",
+        file: "Wheel.dc.html",
+        tag: "Kinetic Motion"
+      },
+      {
+        id: 4,
+        code: "11",
+        title: "11 · 30A in Photos",
+        folder: "11 · 30A in Photos-html",
+        file: "Letters.dc.html",
+        tag: "Masked Type"
+      },
+      {
+        id: 5,
+        code: "12",
+        title: "12 · Morning to Night",
+        folder: "12 · Morning to Night-html",
+        file: "DayNight.dc.html",
+        tag: "Time Progression"
+      },
+      {
+        id: 6,
+        code: "13",
+        title: "13 · Endless Photo Wall",
+        folder: "13 · Endless Photo Wall-html",
+        file: "Columns.dc.html",
+        tag: "Photo Stream"
+      }
+    ];
+
+    let currentIndex = 0;
+    let autoplayInterval = null;
+    const AUTOPLAY_DELAY = 7000;
+
+    // DOM Elements
+    const viewerContainer = document.getElementById('viewer-container');
+    const dotsContainer = document.getElementById('dots-container');
+    const jumpDropdown = document.getElementById('jump-dropdown');
+    const btnJumpMenu = document.getElementById('btn-jump-menu');
+    const labelActiveNum = document.getElementById('label-active-num');
+    const btnAutoplay = document.getElementById('btn-autoplay');
+    const iconPlay = document.getElementById('icon-play');
+    const iconPause = document.getElementById('icon-pause');
+    const textPlayStatus = document.getElementById('text-play-status');
+
+    // Create iframes in container
+    const iframes = [];
+    HERO_SECTIONS.forEach((hero, index) => {
+      const iframe = document.createElement('iframe');
+      iframe.className = `hero-frame ${index === 0 ? 'active' : ''}`;
+      iframe.id = `frame-${index}`;
+      iframe.title = hero.title;
+      iframe.src = `${hero.folder}/${hero.file}`;
+      iframe.setAttribute('loading', 'eager');
+
+      // Forward keyboard events inside iframe to parent
+      iframe.addEventListener('load', () => {
+        try {
+          iframe.contentWindow.addEventListener('keydown', handleGlobalKey);
+          setupTouchSwipe(iframe.contentWindow);
+        } catch(e) {}
+      });
+
+      viewerContainer.appendChild(iframe);
+      iframes.push(iframe);
+    });
+
+    // Build pagination dots & dropdown items
+    HERO_SECTIONS.forEach((hero, index) => {
+      // Dot
+      const dot = document.createElement('button');
+      dot.className = `dock-dot ${index === 0 ? 'active' : ''}`;
+      dot.textContent = (index + 1);
+      dot.title = hero.title;
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+
+      // Dropdown item
+      const item = document.createElement('button');
+      item.className = `jump-item ${index === 0 ? 'active' : ''}`;
+      item.innerHTML = `
+        <span class="jump-num">${index + 1}</span>
+        <span style="color:#FFF;">${hero.title}</span>
+      `;
+      item.addEventListener('click', () => {
+        goToSlide(index);
+        jumpDropdown.classList.remove('open');
+      });
+      jumpDropdown.appendChild(item);
+    });
+
+    // Update UI
+    function updateUI(index) {
+      const hero = HERO_SECTIONS[index];
+
+      // Update active label
+      labelActiveNum.textContent = `${index + 1} / ${HERO_SECTIONS.length}`;
+
+      // Update iframes
+      iframes.forEach((frame, i) => {
+        frame.classList.toggle('active', i === index);
+      });
+
+      // Update dots
+      const dots = dotsContainer.querySelectorAll('.dock-dot');
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+
+      // Update dropdown items
+      const dropItems = jumpDropdown.querySelectorAll('.jump-item');
+      dropItems.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+      });
+
+      // Update URL hash without scroll
+      history.replaceState(null, null, `#version-${hero.code}`);
+    }
+
+    function goToSlide(index) {
+      if (index < 0) {
+        currentIndex = HERO_SECTIONS.length - 1;
+      } else if (index >= HERO_SECTIONS.length) {
+        currentIndex = 0;
+      } else {
+        currentIndex = index;
+      }
+      updateUI(currentIndex);
+    }
+
+    function nextSlide() {
+      goToSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentIndex - 1);
+    }
+
+    // Connect arrow buttons
+    document.getElementById('btn-dock-next').addEventListener('click', nextSlide);
+    document.getElementById('btn-dock-prev').addEventListener('click', prevSlide);
+    document.getElementById('edge-next').addEventListener('click', nextSlide);
+    document.getElementById('edge-prev').addEventListener('click', prevSlide);
+
+    // Dropdown toggle
+    btnJumpMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+      jumpDropdown.classList.toggle('open');
+    });
+
+    document.addEventListener('click', () => {
+      jumpDropdown.classList.remove('open');
+    });
+
+    // Autoplay logic
+    function toggleAutoplay() {
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+        iconPlay.style.display = 'block';
+        iconPause.style.display = 'none';
+        textPlayStatus.textContent = 'Play';
+        btnAutoplay.classList.remove('active');
+      } else {
+        autoplayInterval = setInterval(nextSlide, AUTOPLAY_DELAY);
+        iconPlay.style.display = 'none';
+        iconPause.style.display = 'block';
+        textPlayStatus.textContent = 'Pause';
+        btnAutoplay.classList.add('active');
+      }
+    }
+    btnAutoplay.addEventListener('click', toggleAutoplay);
+
+    // Keyboard Handler
+    function handleGlobalKey(e) {
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+
+      switch(e.key) {
+        case 'ArrowLeft':
+        case 'a':
+        case 'A':
+          prevSlide();
+          break;
+        case 'ArrowRight':
+        case 'd':
+        case 'D':
+          nextSlide();
+          break;
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+          const idx = parseInt(e.key, 10) - 1;
+          if (idx >= 0 && idx < HERO_SECTIONS.length) goToSlide(idx);
+          break;
+        case ' ':
+          e.preventDefault();
+          toggleAutoplay();
+          break;
+      }
+    }
+    window.addEventListener('keydown', handleGlobalKey);
+
+    // Touch Swipe Support
+    function setupTouchSwipe(target) {
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      target.addEventListener('touchstart', (e) => {
+        if (!e.touches || !e.touches[0]) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      target.addEventListener('touchend', (e) => {
+        if (!e.changedTouches || !e.changedTouches[0]) return;
+        const diffX = e.changedTouches[0].clientX - touchStartX;
+        const diffY = e.changedTouches[0].clientY - touchStartY;
+
+        if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX < 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+      }, { passive: true });
+    }
+    setupTouchSwipe(window);
+
+    // Read initial hash if present
+    const hash = window.location.hash;
+    if (hash) {
+      const match = hash.match(/version-(\d+)/);
+      if (match) {
+        const foundIndex = HERO_SECTIONS.findIndex(h => h.code === match[1]);
+        if (foundIndex !== -1) currentIndex = foundIndex;
+      }
+    }
+
+    // Initialize
+    updateUI(currentIndex);
+  </script>
+</body>
+</html>

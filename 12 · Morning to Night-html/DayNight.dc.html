@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Peddlers 30A — Morning to night hero</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;800&amp;family=Yellowtail&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#3959BA}a:hover{color:#01009A}
+</style>
+</helmet>
+<div style="font-family: 'GT Walsheim Trial', 'Hanken Grotesk', 'DM Sans', system-ui, sans-serif; color: #1A1A1A; background: #FFFFFF; min-height: 900px; box-sizing: border-box; display: flex; flex-direction: column">
+
+<header style="width: 100%; box-sizing: border-box; padding: 18px 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; background: #FFFFFF; border-bottom: 1px solid rgba(0,0,0,0.08)">
+<a href="#" aria-label="Peddlers 30A home" style="display: inline-flex"><img src="./assets/9c6fee9d1ff5aeade3753383ba03da0f.png" alt="Peddlers 30A" style="height: 38px; width: auto; display: block"></a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 30px; font-size: 15px; letter-spacing: 1.2px; text-transform: uppercase">
+<a href="#" style="text-decoration: none">Rentals</a>
+<a href="#" style="text-decoration: none">About</a>
+<a href="#" style="text-decoration: none">FAQ</a>
+<a href="#" style="text-decoration: none">Contact</a>
+<a href="#" style="text-decoration: none">Blog</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 12px">
+<a href="tel:8502130040" style="background: #3959BA; color: #FFFFFF; text-decoration: none; font-size: 15px; padding: 14px 20px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">(850) 213-0040</a>
+<a href="#" style="background: #D6C6B2; color: #3959BA; text-decoration: none; font-size: 15px; letter-spacing: 1.2px; text-transform: uppercase; padding: 14px 22px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Reserve Now</a>
+</div>
+</header>
+
+<section style="display: flex; flex-wrap: wrap; flex-grow: 1; min-height: 800px">
+<div style="{{leftStyle}}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-family: 'Pitch Sans', 'Space Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: {{labelColor}}">What a perfect day on 30A looks like</p>
+<h1 style="margin: 0; display: flex; flex-direction: column; font-weight: 500; font-size: 64px; line-height: 1.04; letter-spacing: -0.02em">
+<span>The Best of 30A,</span>
+<span>All in One Place.</span>
+</h1>
+<p aria-live="polite" style="margin: 0; font-family: 'Palm Canyon Drive', 'Yellowtail', cursive; font-size: 64px; line-height: 1.05; color: {{accent}}">{{script}}</p>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; max-width: 480px; color: {{bodyColor}}">{{text}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px">
+<a href="#" style="{{primaryStyle}}">Reserve Now</a>
+<a href="#" style="{{secondaryStyle}}">Explore Pavilion</a>
+</div>
+</div>
+
+<div role="tablist" aria-label="Time of day" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 48px">
+<sc-for list="{{tabs}}" as="tab" hint-placeholder-count="4">
+<button type="button" role="tab" aria-selected="{{tab.selected}}" onClick="{{tab.pick}}" style="{{tab.style}}">
+<span style="font-family: 'Pitch Sans', 'Space Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 2px; text-transform: uppercase">{{tab.label}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+
+<div style="flex: 1.15 1 560px; min-width: 0; position: relative; min-height: 520px; background: #D6C6B2; overflow: hidden">
+<sc-for list="{{photos}}" as="ph" hint-placeholder-count="4">
+<img src="{{ph.src}}" alt="{{ph.alt}}" style="{{ph.style}}">
+</sc-for>
+<div style="position: absolute; right: 28px; bottom: 28px; background: #FFFFFF; padding: 16px 20px; display: flex; flex-direction: column; gap: 4px; max-width: 280px; box-shadow: 0 14px 30px rgba(1,0,154,0.18)">
+<span style="font-family: 'Pitch Sans', 'Space Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: #3959BA">★ 4.3 Google rating</span>
+<span style="font-size: 15px; line-height: 1.45; color: #1A1A1A">“Biking to all of our activities elevated the experience of each.”</span>
+</div>
+</div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"autoplay":{"editor":"boolean","default":true},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { i: 0 };
+this.scenes = [
+{ label: 'Morning', script: 'Coffee, then cruise.', text: 'Latte and a croissant at Kickstand, maple bacon donuts at Charlie’s, then the bike path while it’s still cool.', bg: '#F7F4F0', fg: '#1A1A1A', body: '#666666', label2: '#01009A', accent: '#3959BA', src: './assets/90873560580ca01fa4abce4fa4ad5cd6.jpg', alt: 'Latte and croissant from Kickstand' },
+{ label: 'Midday', script: 'Ride to Rosemary.', text: 'Cruisers fitted for every rider — helmet and lock included — and the 30A coastal path right outside.', bg: '#D6C6B2', fg: '#1A1A1A', body: '#3A3A3A', label2: '#01009A', accent: '#3959BA', src: './assets/5b38dc9193525dfd1803d410f482d928.jpg', alt: 'Three riders cycling past palm trees' },
+{ label: 'Afternoon', script: 'Scoops & sunshine.', text: 'Back to the Pavilion for Sweet Peddler ice cream and Ticheli’s wood-fired pizza.', bg: '#62B1EA', fg: '#01009A', body: '#01009A', label2: '#01009A', accent: '#01009A', src: './assets/30fe7fa07fa29b8f4f45c13392f74c48.jpg', alt: 'Cups of ice cream from Sweet Peddler' },
+{ label: 'Night', script: 'Live at Peddlers.', text: 'Drafts at Peddler’s Pub and local bands most nights in spring and summer. No cover.', bg: '#01009A', fg: '#F7F4F0', body: '#E2E0F2', label2: '#62B1EA', accent: '#62B1EA', src: './assets/fbfa1827ee083b6b1830e74f201dba5b.jpg', alt: 'Live Music Tonight sign next to rental bikes' }
+];
+}
+componentDidMount() {
+let reduce = false;
+try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+if (reduce) return;
+this.timer = setInterval(() => {
+if (this.props.autoplay === false) return;
+this.setState({ i: (this.state.i + 1) % this.scenes.length });
+}, 4500);
+}
+componentWillUnmount() {
+if (this.timer) clearInterval(this.timer);
+}
+renderVals() {
+const s = this.scenes[this.state.i];
+const dark = s.bg === '#01009A';
+const tabs = this.scenes.map((sc, k) => {
+const on = k === this.state.i;
+return {
+label: sc.label,
+selected: on ? 'true' : 'false',
+pick: () => this.setState({ i: k }),
+style: 'background: transparent; border: none; border-top: ' + (on ? '4px solid ' + s.accent : '1px solid ' + (dark ? 'rgba(247,244,240,0.35)' : 'rgba(1,0,154,0.3)')) + '; padding: ' + (on ? '15px' : '18px') + ' 0 0; min-height: 52px; text-align: left; cursor: pointer; color: ' + s.fg + '; opacity: ' + (on ? '1' : '0.7')
+};
+});
+const photos = this.scenes.map((sc, k) => ({
+src: sc.src,
+alt: sc.alt,
+style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 700ms ease, transform 4500ms linear; opacity: ' + (k === this.state.i ? '1' : '0') + '; transform: scale(' + (k === this.state.i ? '1.06' : '1') + ')'
+}));
+return {
+tabs,
+photos,
+script: s.script,
+text: s.text,
+accent: s.accent,
+labelColor: s.label2,
+bodyColor: s.body,
+leftStyle: 'flex: 1 1 480px; min-width: 0; box-sizing: border-box; padding: 56px 56px 40px; display: flex; flex-direction: column; justify-content: space-between; background: ' + s.bg + '; color: ' + s.fg + '; transition: background 700ms ease, color 700ms ease',
+primaryStyle: 'text-decoration: none; font-size: 15px; letter-spacing: 1.2px; text-transform: uppercase; padding: 17px 28px; background: ' + (dark ? '#D6C6B2' : '#3959BA') + '; color: ' + (dark ? '#01009A' : '#FFFFFF'),
+secondaryStyle: 'text-decoration: none; font-size: 15px; letter-spacing: 1.2px; text-transform: uppercase; padding: 16px 26px; border: 1px solid ' + s.fg + '; color: ' + s.fg
+};
+}
+}
+</script>
+</body>
+</html>

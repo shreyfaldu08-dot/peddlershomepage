@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Peddlers 30A — Endless photo wall hero</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;800&amp;family=Yellowtail&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#3959BA}a:hover{color:#01009A}
+@keyframes pd-up{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+@keyframes pd-down{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+@media (prefers-reduced-motion: reduce){.pd-col{animation:none !important}}
+</style>
+</helmet>
+<div style="font-family: 'GT Walsheim Trial', 'Hanken Grotesk', 'DM Sans', system-ui, sans-serif; color: #1A1A1A; background: #F7F4F0; min-height: 900px; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden">
+
+<header style="width: 100%; box-sizing: border-box; padding: 18px 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid rgba(0,0,0,0.08); position: relative; z-index: 2; background: #FFFFFF">
+<a href="#" aria-label="Peddlers 30A home" style="display: inline-flex"><img src="./assets/9c6fee9d1ff5aeade3753383ba03da0f.png" alt="Peddlers 30A" style="height: 38px; width: auto; display: block"></a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 30px; font-size: 15px; letter-spacing: 1.2px; text-transform: uppercase">
+<a href="#" style="text-decoration: none">Rentals</a>
+<a href="#" style="text-decoration: none">About</a>
+<a href="#" style="text-decoration: none">FAQ</a>
+<a href="#" style="text-decoration: none">Contact</a>
+<a href="#" style="text-decoration: none">Blog</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 12px">
+<a href="tel:8502130040" style="background: #3959BA; color: #FFFFFF; text-decoration: none; font-size: 15px; padding: 14px 20px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">(850) 213-0040</a>
+<a href="#" style="background: #D6C6B2; color: #3959BA; text-decoration: none; font-size: 15px; letter-spacing: 1.2px; text-transform: uppercase; padding: 14px 22px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Reserve Now</a>
+</div>
+</header>
+
+<section style="width: 100%; max-width: 1400px; margin: 0 auto; box-sizing: border-box; padding: 0 32px 0 48px; display: flex; flex-wrap: wrap; gap: 48px; flex-grow: 1; align-items: stretch">
+
+<div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 22px; padding: 48px 0">
+<p style="margin: 0; display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; background: #D6C6B2; padding: 9px 16px; font-family: 'Pitch Sans', 'Space Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 1.6px; text-transform: uppercase; color: #01009A">Largest bike rental on Scenic Hwy 30A</p>
+<h1 style="margin: 0; display: flex; flex-direction: column; font-weight: 500; font-size: 72px; line-height: 1.02; letter-spacing: -0.02em; color: #1A1A1A">
+<span>More than</span>
+<span>a bike shop.</span>
+<span style="font-family: 'Palm Canyon Drive', 'Yellowtail', cursive; font-weight: 400; font-size: 96px; line-height: 1.1; color: #3959BA; letter-spacing: 0">A pavilion.</span>
+</h1>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; max-width: 480px; color: #666666">1K+ bikes, nine spots to eat, drink and shop, and live music most nights — Seacrest Beach’s favorite gathering place, right on the 30A bike path.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#" style="background: #3959BA; color: #FFFFFF; text-decoration: none; font-size: 15px; letter-spacing: 1.2px; text-transform: uppercase; padding: 17px 30px">Reserve Now</a>
+<a href="#" style="color: #3959BA; text-decoration: none; font-size: 15px; letter-spacing: 1.2px; text-transform: uppercase; padding: 16px 28px; border: 1px solid #3959BA">Explore Pavilion</a>
+</div>
+<div style="display: flex; align-items: center; gap: 14px; margin-top: 8px; background: #FFFFFF; color: #1A1A1A; padding: 14px 18px; align-self: flex-start; box-shadow: 0 10px 24px rgba(1,0,154,0.08)">
+<span style="font-size: 30px; font-weight: 500; color: #3959BA">4.3★</span>
+<span style="font-size: 14px; line-height: 1.4; max-width: 260px">“Great spot to rent bikes and also get a beer!” <span style="color: #666666">— Google review</span></span>
+</div>
+</div>
+
+<div aria-label="Photos from Peddlers Pavilion" style="flex: 1 1 600px; min-width: 0; height: 780px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; overflow: hidden">
+<div style="overflow: hidden">
+<div class="pd-col" style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 14px; animation: pd-up 38s linear infinite">
+<img src="./assets/5b38dc9193525dfd1803d410f482d928.jpg" alt="Three riders cycling past palm trees" style="width: 100%; height: 300px; object-fit: cover; display: block">
+<img src="./assets/90873560580ca01fa4abce4fa4ad5cd6.jpg" alt="Latte and croissant from Kickstand" style="width: 100%; height: 240px; object-fit: cover; display: block">
+<img src="./assets/57b15a37c362c55ee55fb387d855255e.jpg" alt="Mom on a cruiser towing two kids in a trailer" style="width: 100%; height: 320px; object-fit: cover; display: block">
+<img src="./assets/fbfa1827ee083b6b1830e74f201dba5b.jpg" alt="Live Music Tonight sign next to rental bikes" style="width: 100%; height: 260px; object-fit: cover; display: block">
+<img src="./assets/5b38dc9193525dfd1803d410f482d928.jpg" alt="" aria-hidden="true" style="width: 100%; height: 300px; object-fit: cover; display: block">
+<img src="./assets/90873560580ca01fa4abce4fa4ad5cd6.jpg" alt="" aria-hidden="true" style="width: 100%; height: 240px; object-fit: cover; display: block">
+<img src="./assets/57b15a37c362c55ee55fb387d855255e.jpg" alt="" aria-hidden="true" style="width: 100%; height: 320px; object-fit: cover; display: block">
+<img src="./assets/fbfa1827ee083b6b1830e74f201dba5b.jpg" alt="" aria-hidden="true" style="width: 100%; height: 260px; object-fit: cover; display: block">
+</div>
+</div>
+<div style="overflow: hidden">
+<div class="pd-col" style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 14px; animation: pd-down 46s linear infinite">
+<img src="./assets/404ea2217ebfd83ef2ccd87147ca4471.jpg" alt="The Peddlers Pavilion sign above rental bikes" style="width: 100%; height: 340px; object-fit: cover; display: block">
+<img src="./assets/30fe7fa07fa29b8f4f45c13392f74c48.jpg" alt="Cups of ice cream from Sweet Peddler" style="width: 100%; height: 250px; object-fit: cover; display: block">
+<img src="./assets/b6848e5e9c38c2796e72bdc307c9e099.jpg" alt="A cyclist rides past a white coastal building framed by palms" style="width: 100%; height: 310px; object-fit: cover; display: block">
+<img src="./assets/a2c500dfcc54e4cf8f125582ac41c381.jpg" alt="Local beer poured into a glass" style="width: 100%; height: 240px; object-fit: cover; display: block">
+<img src="./assets/404ea2217ebfd83ef2ccd87147ca4471.jpg" alt="" aria-hidden="true" style="width: 100%; height: 340px; object-fit: cover; display: block">
+<img src="./assets/30fe7fa07fa29b8f4f45c13392f74c48.jpg" alt="" aria-hidden="true" style="width: 100%; height: 250px; object-fit: cover; display: block">
+<img src="./assets/b6848e5e9c38c2796e72bdc307c9e099.jpg" alt="" aria-hidden="true" style="width: 100%; height: 310px; object-fit: cover; display: block">
+<img src="./assets/a2c500dfcc54e4cf8f125582ac41c381.jpg" alt="" aria-hidden="true" style="width: 100%; height: 240px; object-fit: cover; display: block">
+</div>
+</div>
+<div style="overflow: hidden">
+<div class="pd-col" style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 14px; animation: pd-up 32s linear infinite">
+<img src="./assets/9a81539a9ab05886e5e59f42dc7a565f.jpg" alt="Sweet Peddler storefront at the Pavilion" style="width: 100%; height: 290px; object-fit: cover; display: block">
+<img src="./assets/551fd4bfc1b3524dd4cfff1ade77cd55.jpg" alt="Riders cruising a shaded 30A trail" style="width: 100%; height: 330px; object-fit: cover; display: block">
+<img src="./assets/533bdd666fd65c636966558c405d5d57.jpg" alt="Drafts and cocktails in the sun" style="width: 100%; height: 250px; object-fit: cover; display: block">
+<img src="./assets/786e623f4568cffaacfc10b9b4ef672b.jpg" alt="Aerial view of Peddlers Pavilion and its bike fleet" style="width: 100%; height: 260px; object-fit: cover; display: block">
+<img src="./assets/9a81539a9ab05886e5e59f42dc7a565f.jpg" alt="" aria-hidden="true" style="width: 100%; height: 290px; object-fit: cover; display: block">
+<img src="./assets/551fd4bfc1b3524dd4cfff1ade77cd55.jpg" alt="" aria-hidden="true" style="width: 100%; height: 330px; object-fit: cover; display: block">
+<img src="./assets/533bdd666fd65c636966558c405d5d57.jpg" alt="" aria-hidden="true" style="width: 100%; height: 250px; object-fit: cover; display: block">
+<img src="./assets/786e623f4568cffaacfc10b9b4ef672b.jpg" alt="" aria-hidden="true" style="width: 100%; height: 260px; object-fit: cover; display: block">
+</div>
+</div>
+</div>
+
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
